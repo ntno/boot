@@ -1,0 +1,9 @@
+[default]
+region = us-east-1
+output = json
+[profile inferno-svc]
+region = us-east-1
+output = json
+[profile inferno-natan]
+region = us-east-1
+output = json
