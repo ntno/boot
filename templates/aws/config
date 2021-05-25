@@ -1,9 +1,6 @@
 [default]
 region = us-east-1
 output = json
-[profile inferno-svc]
-region = us-east-1
-output = json
-[profile inferno-natan]
+[profile AWS_SVC_PROFILE_NAME]
 region = us-east-1
 output = json
