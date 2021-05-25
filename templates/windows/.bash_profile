@@ -24,8 +24,8 @@ fi
 
 # credit: https://docs.github.com/en/github/authenticating-to-github/working-with-ssh-key-passphrases
 # start the ssh agent
-mkdir -p "$HOME/.ssh"
-env="$HOME/.ssh/agent.env"
+mkdir -p "${HOME}/.ssh"
+env="${HOME}/.ssh/agent.env"
 
 agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
 
@@ -47,8 +47,10 @@ fi
 
 unset env
 
-export C_DRIVE=/cygdrive/c/Users/natan
-export CODE_HOME=/cygdrive/c/Users/natan/Documents/projects
-export DATACLUB=/cygdrive/z
-export RON_IN_DATACLUB="/cygdrive/z/Ron's Personal"
+export Z_DRIVE=$(cygpath /cygdrive/z)
+export C_DRIVE=$(cygpath /cygdrive/c)
+export MY_DOCS=$(cygpath --mydocs)
+export CODE_HOME="${MY_DOCS}/projects"
+export DATACLUB="${Z_DRIVE}"
+export RON_IN_DATACLUB="${DATACLUB}/Ron's Personal"
 
