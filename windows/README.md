@@ -14,3 +14,12 @@ notes compiled while setting up development environment on Windows 10 in May 202
 - git
 packages:
 - gnu make
+
+# update HOME environment variable
+
+```
+HOME=%USERPROFILE%
+```
+
+[fix permissions on private key](https://itectec.com/superuser/windows-ssh-permissions-for-private-key-are-too-open/)
+

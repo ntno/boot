@@ -22,16 +22,10 @@ if [ -d "${HOME}/bin" ] ; then
   PATH="${HOME}/bin:${PATH}"
 fi
 
-export C_DRIVE=/cygdrive/c/Users/natan
-export CODE_HOME=/cygdrive/c/Users/natan/Documents/projects
-export DATACLUB=/cygdrive/z
-export RON_IN_DATACLUB="/cygdrive/z/Ron's Personal"
-
 # credit: https://docs.github.com/en/github/authenticating-to-github/working-with-ssh-key-passphrases
 # start the ssh agent
-mkdir -p "$C_DRIVE/.ssh"
-env="$C_DRIVE/.ssh/agent.env"
-touch $env
+mkdir -p "$HOME/.ssh"
+env="$HOME/.ssh/agent.env"
 
 agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
 
@@ -52,3 +46,9 @@ elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
 fi
 
 unset env
+
+export C_DRIVE=/cygdrive/c/Users/natan
+export CODE_HOME=/cygdrive/c/Users/natan/Documents/projects
+export DATACLUB=/cygdrive/z
+export RON_IN_DATACLUB="/cygdrive/z/Ron's Personal"
+
