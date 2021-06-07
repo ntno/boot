@@ -16,6 +16,7 @@ ifeq ("$(platform)", "windows")
 	@cp ./templates/$(platform)/nsswitch.conf /etc/nsswitch.conf
 endif
 
+#https://apple.stackexchange.com/questions/254380/why-am-i-getting-an-invalid-active-developer-path-when-attempting-to-use-git-a
 install-xcode:
 ifeq ("$(platform)", "mac")
 	xcode-select --install
