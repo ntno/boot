@@ -1,4 +1,4 @@
-notes compiled while setting up development environment on Windows 10 in May 2021.
+notes compiled while setting up development environment on Windows 10 in May 2021.  must be a real machine, not a Windows VM.
 
 # install initial software
 
@@ -9,7 +9,8 @@ notes compiled while setting up development environment on Windows 10 in May 202
 - [cygwin](https://cygwin.com/cygwin-ug-net/setup-net.html#internet-setup)
   + root folder: `C:\cygwin`
   + package folder: `C:\cygwin-packages`
-
+  + packages to install: 
+    - install the 'make' package `Devel > make`
 # install 
 - git
 packages:
