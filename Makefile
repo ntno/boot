@@ -16,6 +16,11 @@ ifeq ("$(platform)", "windows")
 	@cp ./templates/$(platform)/nsswitch.conf /etc/nsswitch.conf
 endif
 
+install-xcode:
+ifeq ("$(platform)", "mac")
+	xcode-select --install
+endif
+
 configure-vscode:
 ifeq ("$(platform)", "windows")
 	@cp ./templates/$(platform)/cygpath-git-vscode.bat "$(home_dir)/cygpath-git-vscode.bat"
