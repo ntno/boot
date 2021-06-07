@@ -16,6 +16,14 @@ ifeq ("$(platform)", "windows")
 	@cp ./templates/$(platform)/nsswitch.conf /etc/nsswitch.conf
 endif
 
+configure-vscode:
+ifeq ("$(platform)", "windows")
+	@cp ./templates/$(platform)/cygpath-git-vscode.bat "$(home_dir)/cygpath-git-vscode.bat"
+	@cp -f ~/AppData/Roaming/Code/User/settings.json ~/AppData/Roaming/Code/User/settings.json.bak && \
+	cp ./templates/$(platform)/vscode_user_settings.json ~/AppData/Roaming/Code/User/settings.json && \
+	sed -i -e "s/USER_PROFILE/$$USER/g" ~/AppData/Roaming/Code/User/settings.json
+endif
+
 create-git-ssh-key: check-email set-up-initial-directories
 	@echo ">>>> enter a password when prompted (password is required in order for key to be used with github)"
 	ssh-keygen -t ed25519 -C "$(email)" -f $(git_ssh_key_file_path) 
