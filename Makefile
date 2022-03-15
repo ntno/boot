@@ -29,8 +29,6 @@ ifeq ("$(platform)", "windows")
 	sed -i -e "s/USER_PROFILE/$$USER/g" ~/AppData/Roaming/Code/User/settings.json
 endif
 
-set-up-git: configure-git create-git-ssh-key
-
 create-git-ssh-key: check-email set-up-initial-directories
 	@echo ">>>> enter a password when prompted (password is required in order for key to be used with github)"
 	ssh-keygen -t ed25519 -C "$(email)" -f $(git_ssh_key_file_path) 
@@ -52,6 +50,9 @@ configure-aws: check-aws-access-key-id check-aws-secret-access-key set-up-initia
 	@sed -i -e "s/AWS_SVC_PROFILE_NAME/$(aws_svc_profile_name)/g" 	"$(home_dir)/.aws/credentials"
 	@sed -i -e "s/AWS_ACCESS_KEY_ID/$(aws-access-key-id)/g" 		"$(home_dir)/.aws/credentials"
 	@sed -i -e "s/AWS_SECRET_ACCESS_KEY/$(aws-secret-access-key)/g" "$(home_dir)/.aws/credentials"
+
+set-up-git: configure-git create-git-ssh-key
+
 
 check-email:
 ifndef email
