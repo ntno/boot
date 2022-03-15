@@ -21,21 +21,18 @@ ifeq ("$(platform)", "mac")
 	xcode-select --install
 endif
 
-configure-vscode:
-ifeq ("$(platform)", "windows")
-	@cp ./templates/$(platform)/cygpath-git-vscode.bat "$(home_dir)/cygpath-git-vscode.bat"
-	@cp -f ~/AppData/Roaming/Code/User/settings.json ~/AppData/Roaming/Code/User/settings.json.bak && \
-	cp ./templates/$(platform)/vscode_user_settings.json ~/AppData/Roaming/Code/User/settings.json && \
-	sed -i -e "s/USER_PROFILE/$$USER/g" ~/AppData/Roaming/Code/User/settings.json
-endif
-
-create-git-ssh-key: check-email set-up-initial-directories
-	@echo ">>>> enter a password when prompted (password is required in order for key to be used with github)"
-	ssh-keygen -t ed25519 -C "$(email)" -f $(git_ssh_key_file_path) 
+create-git-ssh-key: check-email set-up-initial-directories prompt-git-create-ssh-key
+	ssh-keygen -t ed25519 -C "$(email)" -f $(git_ssh_key_file_path)
 	@chmod 700 $(git_ssh_key_file_path)
+	@$(MAKE) --no-print-directory prompt-user-to-complete-setup
+	
+prompt-git-create-ssh-key:
+	@echo ">>>> enter a password when prompted (password is required in order for key to be used with github)"
+
+prompt-user-to-complete-setup:
 	@echo ">>>> create a new SSH Key in [github](https://github.com/settings/ssh/new)."
-	@echo ">>>> use name='$(email)'." 
-	@echo ">>>> use key='$(shell cat $(git_ssh_key_file_path).pub)'."
+	@echo ">>>> use name='$(email)'" 
+	@echo ">>>> use key='$(shell cat $(git_ssh_key_file_path).pub)'"
 
 configure-git: check-github-username 
 	@cp ./templates/git/.gitignore_global 			"$(home_dir)/.gitignore_global"
