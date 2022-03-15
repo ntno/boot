@@ -1,6 +1,6 @@
 [user]
-        name = GIT_USERNAME
-        email = GIT_USERNAME@users.noreply.github.com
+        name = GITHUB_USERNAME
+        email = GITHUB_USERNAME@users.noreply.github.com
 [core]
         autocrlf = false
         safecrlf = true

@@ -1,6 +1,6 @@
 # boot
 
-this repository includes instructions for setting up a development environment on Windows and Unix.  the notes were most recently updated while setting up development environment on Windows 11 Pro in March 2022.  these instructions should be completed before working on Inferno development projects.
+this repository includes instructions for setting up a development environment on Windows and Unix.  the notes were most recently updated while setting up development environment on Windows 11 Pro in March 2022.  these instructions should be completed before working on development projects.
 
 ## prerequisites 
 - the computer must be a real machine, not a Windows VM.  see [system-specs](./system-specs.md) for example machine set ups.  
@@ -31,52 +31,57 @@ you will need to keep track of several usernames, passwords, tokens, etc.  a sec
     - install the 'make' package `Devel > make`
     - install the 'git' package
  
-## set up git
-- open cygwin terminal and navigate to home directory 
-  - `cd ~`
-- print the current working directory
-  - `pwd`
-  - you should see something like "/home/natan" printed out
-- [generate a SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh).  this will be used to securely connect to github.com. 
+## set USERPROFILE and HOME environment variables
 
-### ssh key
-  - `ssh-keygen -t ed25519 -C "your_email@example.com"`
-  - when you're prompted to "Enter a file in which to save the key," press Enter. this accepts the default file location.
-  - when you're prompted to "Enter a passphrase," enter a secret passsphrase.  keep track of this password in your password manager.
-- verify that the public and private key were successfully created      
-  - `ls -ltra ~/.ssh`   
-    ```
-    $ ls -ltra ~/.ssh
-    total 16
-    -rw-r--r--  1 natan Domain Users 102 Mar 15 10:26 id_ed25519.pub
-    -rw-------  1 natan Domain Users 464 Mar 15 10:26 id_ed25519
-    ```
-  - you should see `id_ed25519` and `id_ed25519.pub`
-- add your public ssh key to your github account
-  - Settings > SSH and GPG keys > New SSH key
-  - enter a name for the key that will help you distinguish it from other keys (ex: "name_of_computer, your_email@example.com") 
-  - for the key content, copy in your *public* key
-    - `cat ~/.ssh/id_ed25519.pub`
-    ```
-     cat ~/.ssh/id_ed25519.pub
-     ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFhbo7fA3wqCY4der3VHpikmw1EXBhF9l3i2UDJvh+6W natan@infernomfg.com
-    ```
-- copy either the [Unix](./unix/config) or [Windows](./windows/config) ssh config file to your ssh folder (`~/.ssh/config`)
+### Windows
+ 
+Settings > About > Advanced System Settings > Environment Variables  
+Add a USERPROFILE environment variable.  It should look something like one of the following:
+`USERPROFILE=C:\Users\natan.MY`
+or 
+`USERPROFILE=C:\Users\natan`
 
-### general config
-- copy the [git ignore file](./git/gitignore_global) to  your home folder (`~/gitignore_global`)
-- copy the [git config file](./git/gitconfig) to your home folder (`~/.gitconfig`)
-  - replace **GIT_USERNAME** with *your* github username
-
-# update HOME environment variable
-
-[instructions](https://thecategorizer.com/windows/how-to-add-path-and-environment-variables-in-windows/)  
-
+Next, set HOME to the value of USERPROFILE:
 ```
-USERPROFILE=C:\Users\natan.MY
 HOME=%USERPROFILE%
 ```
 
-[fix permissions on private key](https://itectec.com/superuser/windows-ssh-permissions-for-private-key-are-too-open/)
+### Mac
 
-	@if(test -f $(git_ssh_key_file_path)) then echo "key already exists. exiting..." && exit; else echo "key does not exist, creating key..."; fi;
+HOME variable should be set automatically so no action is necessary here
+
+
+## run auto-setup commands
+
+### Windows  
+
+1. download this repository as zip: https://github.com/ntno/boot  
+2. move zip file to your documents folder and unzip (ex: `C:\Users\natan.MY\Documents`)  
+3. open cygwin and navigate to the repository source code:    
+    - `cd /cygdrive/c/Users/natan.MY/Documents/boot`
+4. run initial set up commands:
+    - `make configure-bash-profile`
+    - `make configure-cygwin-profile`
+    - `make configure-vscode`
+    - `make set-up-git github-username=YOUR_GITHUB_USERNAME email=YOUR_EMAIL`
+5. STOP! do not proceed until you have added your new github ssh key to your github account
+
+### Mac  
+
+1. download this repository as zip: https://github.com/ntno/boot  
+2. move zip file to your documents folder and unzip (ex: `/Users/ntno/Documents`)  
+3. open terminal and navigate to the repository source code:  
+    - `cd /Users/ntno/Documents/boot`  
+4. run initial set up commands:   
+    - `make configure-bash-profile platform=mac`  
+    - `make install-xcode platform=mac`  
+    - `make set-up-git github-username=YOUR_GITHUB_USERNAME email=YOUR_EMAIL platform=mac`  
+
+5. STOP! do not proceed until you have added your new github ssh key to your github account
+
+
+## verify initial git set up  
+
+- close current cygwin/terminal window and open a new one
+  - enter your ssh key passphrase if prompted
+- follow github's [Testing your SSH connection](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/testing-your-ssh-connection) article to verify your git credentials are set up correctly

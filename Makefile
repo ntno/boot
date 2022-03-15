@@ -6,7 +6,6 @@ aws_svc_profile_name := inferno-svc
 set-up-initial-directories:
 	@mkdir -p "$(home_dir)/.ssh"
 	@mkdir -p "$(home_dir)/.aws"
-	@mkdir -p "${CODE_HOME}"
 
 configure-bash-profile:
 	@cp ./templates/$(platform)/.bash_profile "$(home_dir)/.bash_profile"
@@ -38,10 +37,10 @@ create-git-ssh-key: check-email set-up-initial-directories
 	@echo ">>>> use name='$(email)'." 
 	@echo ">>>> use key='$(shell cat $(git_ssh_key_file_path).pub)'."
 
-configure-git: check-git-username 
+configure-git: check-github-username 
 	@cp ./templates/git/.gitignore_global 			"$(home_dir)/.gitignore_global"
 	@cp ./templates/git/.gitconfig 					"$(home_dir)/.gitconfig"
-	@sed -i -e "s/GIT_USERNAME/$(git-username)/g" 	"$(home_dir)/.gitconfig"
+	@sed -i -e "s/GITHUB_USERNAME/$(github-username)/g" 	"$(home_dir)/.gitconfig"
 
 configure-aws: check-aws-access-key-id check-aws-secret-access-key set-up-initial-directories
 	@cp ./templates/aws/config "$(home_dir)/.aws/config"
@@ -52,14 +51,17 @@ configure-aws: check-aws-access-key-id check-aws-secret-access-key set-up-initia
 	@sed -i -e "s/AWS_ACCESS_KEY_ID/$(aws-access-key-id)/g" 		"$(home_dir)/.aws/credentials"
 	@sed -i -e "s/AWS_SECRET_ACCESS_KEY/$(aws-secret-access-key)/g" "$(home_dir)/.aws/credentials"
 
+set-up-git: configure-git create-git-ssh-key
+
+
 check-email:
 ifndef email
 	$(error email is not defined)
 endif
 
-check-git-username:
-ifndef git-username
-	$(error git-username is not defined)
+check-github-username:
+ifndef github-username
+	$(error github-username is not defined)
 endif
 
 check-aws-access-key-id:
