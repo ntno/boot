@@ -1,6 +1,6 @@
 # manual set up 
 alternate to running 
-`make set-up-git email=your_email@example.com git-username=ntno`
+`make set-up-git email=YOUR_EMAIL git-username=YOUR_GITHUB_USERNAME`
 
 ## set up git
 - open cygwin terminal and navigate to home directory 
@@ -37,4 +37,4 @@ alternate to running
 ### general config
 - copy the [git ignore file](./git/gitignore_global) to  your home folder (`~/gitignore_global`)
 - copy the [git config file](./git/gitconfig) to your home folder (`~/.gitconfig`)
-  - replace **GIT_USERNAME** with *your* github username
+  - replace **GITHUB_USERNAME** with *your* github username

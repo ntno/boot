@@ -40,7 +40,7 @@ create-git-ssh-key: check-email set-up-initial-directories
 configure-git: check-git-username 
 	@cp ./templates/git/.gitignore_global 			"$(home_dir)/.gitignore_global"
 	@cp ./templates/git/.gitconfig 					"$(home_dir)/.gitconfig"
-	@sed -i -e "s/GIT_USERNAME/$(git-username)/g" 	"$(home_dir)/.gitconfig"
+	@sed -i -e "s/GITHUB_USERNAME/$(git-username)/g" 	"$(home_dir)/.gitconfig"
 
 configure-aws: check-aws-access-key-id check-aws-secret-access-key set-up-initial-directories
 	@cp ./templates/aws/config "$(home_dir)/.aws/config"
