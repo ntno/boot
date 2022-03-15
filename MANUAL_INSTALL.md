@@ -1,6 +1,6 @@
 # manual set up 
 alternate to running 
-`make set-up-git email=natan@infernomfg.com git-username=ntno`
+`make set-up-git email=your_email@example.com git-username=ntno`
 
 ## set up git
 - open cygwin terminal and navigate to home directory 
@@ -30,7 +30,7 @@ alternate to running
     - `cat ~/.ssh/id_ed25519.pub`
     ```
      cat ~/.ssh/id_ed25519.pub
-     ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFhbo7fA3wqCY4der3VHpikmw1EXBhF9l3i2UDJvh+6W natan@infernomfg.com
+     ssh-ed25519 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx your_email@example.com
     ```
 - copy either the [Unix](./unix/config) or [Windows](./windows/config) ssh config file to your ssh folder (`~/.ssh/config`)
 
