@@ -38,6 +38,8 @@ you will need to keep track of several usernames, passwords, tokens, etc.  a sec
   - `pwd`
   - you should see something like "/home/natan" printed out
 - [generate a SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh).  this will be used to securely connect to github.com. 
+
+### ssh key
   - `ssh-keygen -t ed25519 -C "your_email@example.com"`
   - when you're prompted to "Enter a file in which to save the key," press Enter. this accepts the default file location.
   - when you're prompted to "Enter a passphrase," enter a secret passsphrase.  keep track of this password in your password manager.
@@ -59,7 +61,12 @@ you will need to keep track of several usernames, passwords, tokens, etc.  a sec
      cat ~/.ssh/id_ed25519.pub
      ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFhbo7fA3wqCY4der3VHpikmw1EXBhF9l3i2UDJvh+6W natan@infernomfg.com
     ```
-- copy either the [Unix](./unix/config) or [Windows](./windows/config) ssh config file to your ssh folder (`~/.ssh`)
+- copy either the [Unix](./unix/config) or [Windows](./windows/config) ssh config file to your ssh folder (`~/.ssh/config`)
+
+### general config
+- copy the [git ignore file](./git/gitignore_global) to  your home folder (`~/gitignore_global`)
+- copy the [git config file](./git/gitconfig) to your home folder (`~/.gitconfig`)
+  - replace **GIT_USERNAME** with *your* github username
 
 # update HOME environment variable
 
