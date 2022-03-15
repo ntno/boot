@@ -63,7 +63,7 @@ HOME variable should be set automatically so no action is necessary here
     - `make configure-bash-profile`
     - `make configure-cygwin-profile`
     - `make configure-vscode`
-    - `make set-up-git git-username=YOUR_GITHUB_USERNAME email=YOUR_EMAIL`
+    - `make set-up-git github-username=YOUR_GITHUB_USERNAME email=YOUR_EMAIL`
 5. STOP! do not proceed until you have added your new github ssh key to your github account
 
 ### Mac  
@@ -75,7 +75,7 @@ HOME variable should be set automatically so no action is necessary here
 4. run initial set up commands:   
     - `make configure-bash-profile platform=mac`  
     - `make install-xcode platform=mac`  
-    - `make set-up-git git-username=YOUR_GITHUB_USERNAME email=YOUR_EMAIL platform=mac`  
+    - `make set-up-git github-username=YOUR_GITHUB_USERNAME email=YOUR_EMAIL platform=mac`  
 
 5. STOP! do not proceed until you have added your new github ssh key to your github account
 

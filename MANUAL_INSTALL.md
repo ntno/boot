@@ -1,6 +1,6 @@
 # manual set up 
 alternate to running 
-`make set-up-git email=YOUR_EMAIL git-username=YOUR_GITHUB_USERNAME`
+`make set-up-git email=YOUR_EMAIL github-username=YOUR_GITHUB_USERNAME`
 
 ## set up git
 - open cygwin terminal and navigate to home directory 
