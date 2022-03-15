@@ -6,7 +6,6 @@ aws_svc_profile_name := inferno-svc
 set-up-initial-directories:
 	@mkdir -p "$(home_dir)/.ssh"
 	@mkdir -p "$(home_dir)/.aws"
-	@mkdir -p "${CODE_HOME}"
 
 configure-bash-profile:
 	@cp ./templates/$(platform)/.bash_profile "$(home_dir)/.bash_profile"
@@ -29,6 +28,8 @@ ifeq ("$(platform)", "windows")
 	cp ./templates/$(platform)/vscode_user_settings.json ~/AppData/Roaming/Code/User/settings.json && \
 	sed -i -e "s/USER_PROFILE/$$USER/g" ~/AppData/Roaming/Code/User/settings.json
 endif
+
+set-up-git: configure-git create-git-ssh-key
 
 create-git-ssh-key: check-email set-up-initial-directories
 	@echo ">>>> enter a password when prompted (password is required in order for key to be used with github)"
