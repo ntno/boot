@@ -1,6 +1,6 @@
 # boot
 
-this repository includes instructions for setting up a development environment on Windows and Unix.  the notes were most recently updated while setting up development environment on Windows 11 Pro in March 2022.  these instructions should be completed before working on Inferno development projects.
+this repository includes instructions for setting up a development environment on Windows and Unix.  the notes were most recently updated while setting up development environment on Windows 11 Pro in March 2022.  these instructions should be completed before working on development projects.
 
 ## prerequisites 
 - the computer must be a real machine, not a Windows VM.  see [system-specs](./system-specs.md) for example machine set ups.  
@@ -31,7 +31,7 @@ you will need to keep track of several usernames, passwords, tokens, etc.  a sec
     - install the 'make' package `Devel > make`
     - install the 'git' package
  
-## choose default folders, add to environment variables
+## set USERPROFILE and HOME environment variables
 
 ### Windows
  
@@ -50,6 +50,38 @@ HOME=%USERPROFILE%
 
 HOME variable should be set automatically so no action is necessary here
 
-[fix permissions on private key](https://itectec.com/superuser/windows-ssh-permissions-for-private-key-are-too-open/)
 
-	@if(test -f $(git_ssh_key_file_path)) then echo "key already exists. exiting..." && exit; else echo "key does not exist, creating key..."; fi;
+## run auto-setup commands
+
+### Windows  
+
+1. download this repository as zip: https://github.com/ntno/boot  
+2. move zip file to your documents folder and unzip (ex: `C:\Users\natan.MY\Documents`)  
+3. open cygwin and navigate to the repository source code:    
+    - `cd /cygdrive/c/Users/natan.MY/Documents/boot`
+4. run initial set up commands:
+    - `make configure-bash-profile`
+    - `make configure-cygwin-profile`
+    - `make configure-vscode`
+    - `make set-up-git git-username=YOUR_GITHUB_USERNAME email=YOUR_EMAIL`
+5. STOP! do not proceed until you have added your new github ssh key to your github account
+
+### Mac  
+
+1. download this repository as zip: https://github.com/ntno/boot  
+2. move zip file to your documents folder and unzip (ex: `/Users/ntno/Documents`)  
+3. open terminal and navigate to the repository source code:  
+    - `cd /Users/ntno/Documents/boot`  
+4. run initial set up commands:   
+    - `make configure-bash-profile platform=mac`  
+    - `make install-xcode platform=mac`  
+    - `make set-up-git git-username=YOUR_GITHUB_USERNAME email=YOUR_EMAIL platform=mac`  
+
+5. STOP! do not proceed until you have added your new github ssh key to your github account
+
+
+## verify initial git set up  
+
+- close current cygwin/terminal window and open a new one
+  - enter your ssh key passphrase if prompted
+- follow github's [Testing your SSH connection](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/testing-your-ssh-connection) article to verify your git credentials are set up correctly
