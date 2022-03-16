@@ -48,6 +48,14 @@ configure-aws: check-aws-access-key-id check-aws-secret-access-key set-up-initia
 	@sed -i -e "s/AWS_ACCESS_KEY_ID/$(aws-access-key-id)/g" 		"$(home_dir)/.aws/credentials"
 	@sed -i -e "s/AWS_SECRET_ACCESS_KEY/$(aws-secret-access-key)/g" "$(home_dir)/.aws/credentials"
 
+configure-vscode:
+ifeq ("$(platform)", "windows")
+	@cp ./templates/$(platform)/cygpath-git-vscode.bat "$(home_dir)/cygpath-git-vscode.bat"
+	@cp -f ~/AppData/Roaming/Code/User/settings.json ~/AppData/Roaming/Code/User/settings.json.bak && \
+	cp ./templates/$(platform)/vscode_user_settings.json ~/AppData/Roaming/Code/User/settings.json && \
+	sed -i -e "s/USER_PROFILE/$$USERPROFILE/g" ~/AppData/Roaming/Code/User/settings.json
+endif
+
 set-up-git: configure-git create-git-ssh-key
 
 

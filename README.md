@@ -8,7 +8,7 @@ this repository includes instructions for setting up a development environment o
 - [dockerhub](https://hub.docker.com/) account
 
 
-## credential information
+## credentials
 you will need to keep track of several usernames, passwords, tokens, etc.  a secure password manager is highly recommended.  please note the following as you proceed through the instructions:  
 
 - github username, password, ssh key passphrase 
@@ -24,13 +24,16 @@ you will need to keep track of several usernames, passwords, tokens, etc.  a sec
   + if necessary, install [WSL 2 Linux kernel](https://docs.microsoft.com/en-us/windows/wsl/install-manua) via separate package
     + install Alpine WSL via Microsoft Store app
     + create UNIX username/password (prompt will pop up after first launch)
-- [cygwin](https://cygwin.com/cygwin-ug-net/setup-net.html#internet-setup)
+- [git](https://git-scm.com/download)
+  + during the install set up you will be asked to choose a default text editor.  choose "Use Visual Studio Code as Git's default editor" unless you are already comfortable using vim 
+  + override default branch name to "main"
+- [cygwin](https://cygwin.com/cygwin-ug-net/setup-net.html#internet-setup) (required for Windows only)
   + root folder: `C:\cygwin`
   + package folder: `C:\cygwin-packages`
   + packages to install: 
     - install the 'make' package `Devel > make`
     - install the 'git' package
- 
+
 ## set USERPROFILE and HOME environment variables
 
 ### Windows
