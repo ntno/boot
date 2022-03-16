@@ -12,19 +12,25 @@ set-up-initial-directories:
 configure-bash-profile:
 	@cp ./templates/$(platform)/.bash_profile "$(home_dir)/.bash_profile"
 
-configure-cygwin:
+configure-cygwin: configure-cygwin-home configure-vscode-as-external-git-editor fix-vscode-git-integration
+
+configure-cygwin-home:
 ifeq ("$(platform)", "windows")
 	@cp ./templates/$(platform)/nsswitch.conf /etc/nsswitch.conf
+endif
+
+#TODO - need to refactor so that if you run git set up you don't lose core.editor setting
+configure-vscode-as-external-git-editor:
+ifeq ("$(platform)", "windows")
 	@cp ./templates/$(platform)/cygpath-git-editor.sh "$(home_dir)/cygpath-git-editor.sh"
 	@chmod +x "$(home_dir)/cygpath-git-editor.sh"
 	@git config --global core.editor "$(home_dir)/cygpath-git-editor.sh"
 endif
 
-configure-vscode:
+fix-vscode-git-integration:
 ifeq ("$(platform)", "windows")
 	@cp ./templates/$(platform)/cygpath-git-vscode.bat "$(home_dir)/cygpath-git-vscode.bat"
 	@echo "$(VS_CODE_SETTING_SNIPPET)" >  ~/AppData/Roaming/Code/User/git-path.json
-	@touch ~/AppData/Roaming/Code/User/settings.json
 	@cp -f ~/AppData/Roaming/Code/User/settings.json ~/AppData/Roaming/Code/User/settings.json.bak
 	@jq -s add  ~/AppData/Roaming/Code/User/settings.json.bak ~/AppData/Roaming/Code/User/git-path.json > ~/AppData/Roaming/Code/User/settings.json
 endif
