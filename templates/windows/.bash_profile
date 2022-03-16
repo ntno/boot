@@ -48,6 +48,7 @@ elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
   echo "adding ssh key..."
 elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 0 ]; then
   # echo "ssh already running..."
+  continue
 fi
 
 unset env
