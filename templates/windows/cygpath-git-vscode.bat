@@ -3,9 +3,10 @@ REM #
 REM # author: nickbudi
 REM # https://gist.github.com/nickbudi/4b489f50086db805ea0f3864aa93a9f8
 REM #
-REM wrapper to convert linux paths to windows
-REM so vscode git integration will work with cygwin
-REM "git.path"="C:\\this\\file.bat" in settings.json
+REM # this script fixes vscode-cygwin-git integration so that only 
+REM # files which are actually modified show up as being modified in vscode
+REM #
+REM # "git.path"="C:\\this\\file.bat" in the vscode settings.json
 
 setlocal
 set PATH=C:\cygwin\bin;%PATH%

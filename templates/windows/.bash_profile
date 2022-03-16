@@ -39,10 +39,16 @@ agent_load_env
 agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
 
 if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
-    agent_start
-    ssh-add
+  echo "starting agent..."
+  agent_start
+  echo "adding ssh key..."
+  ssh-add
 elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
-    ssh-add
+  echo "adding ssh key..."
+  ssh-add
+elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 0 ]; then
+  # echo "ssh already running..."
+  :;
 fi
 
 unset env

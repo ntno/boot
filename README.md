@@ -8,7 +8,7 @@ this repository includes instructions for setting up a development environment o
 - [dockerhub](https://hub.docker.com/) account
 
 
-## credential information
+## credentials
 you will need to keep track of several usernames, passwords, tokens, etc.  a secure password manager is highly recommended.  please note the following as you proceed through the instructions:  
 
 - github username, password, ssh key passphrase 
@@ -24,13 +24,16 @@ you will need to keep track of several usernames, passwords, tokens, etc.  a sec
   + if necessary, install [WSL 2 Linux kernel](https://docs.microsoft.com/en-us/windows/wsl/install-manua) via separate package
     + install Alpine WSL via Microsoft Store app
     + create UNIX username/password (prompt will pop up after first launch)
-- [cygwin](https://cygwin.com/cygwin-ug-net/setup-net.html#internet-setup)
+- [git](https://git-scm.com/download)
+  + override default branch name to "main"
+- [cygwin](https://cygwin.com/cygwin-ug-net/setup-net.html#internet-setup) (required for Windows only)
   + root folder: `C:\cygwin`
   + package folder: `C:\cygwin-packages`
   + packages to install: 
     - install the 'make' package `Devel > make`
     - install the 'git' package
- 
+    - install the 'jq' package
+
 ## set USERPROFILE and HOME environment variables
 
 ### Windows
@@ -55,20 +58,19 @@ HOME variable should be set automatically so no action is necessary here
 
 ### Windows  
 
-1. download this repository as zip: https://github.com/ntno/boot/archive/refs/tags/0.0.0.zip  
+1. download this repository as zip: https://github.com/ntno/boot/archive/refs/tags/1.0.0.zip  
 2. move zip file to your documents folder and unzip (ex: `C:\Users\natan.MY\Documents`)  
 3. open cygwin and navigate to the repository source code:    
     - `cd /cygdrive/c/Users/natan.MY/Documents/boot`
 4. run initial set up commands:
     - `make configure-bash-profile`
-    - `make configure-cygwin-profile`
-    - `make configure-vscode`
     - `make set-up-git github-username=YOUR_GITHUB_USERNAME email=YOUR_EMAIL`
+    - `make configure-cygwin`
 5. STOP! do not proceed until you have added your new github ssh key to your github account
 
 ### Mac  
 
-1. download this repository as zip:https://github.com/ntno/boot/archive/refs/tags/0.0.0.zip   
+1. download this repository as zip:https://github.com/ntno/boot/archive/refs/tags/1.0.0.zip   
 2. move zip file to your documents folder and unzip (ex: `/Users/ntno/Documents`)  
 3. open terminal and navigate to the repository source code:  
     - `cd /Users/ntno/Documents/boot`  
