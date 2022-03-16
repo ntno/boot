@@ -16,4 +16,4 @@ for last; do true; done
 all="${@:1:$(($#-1))}"
 
 # launch editor with windows path
-code $all $(cygpath -w $last)
+code $all $(cygpath -w $last) --wait -n
