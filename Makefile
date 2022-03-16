@@ -18,12 +18,22 @@ ifeq ("$(platform)", "windows")
 	@git config --global core.editor "$(home_dir)/cygpath-git-editor.sh"
 endif
 
+#s/\\/\\\\/g
+#   | sed -i -e 's=/=//=g'" && \
+# 	export ESCAPED_WINDOWS_STYLE_USERPROFILE="$(shell $$WINDOWS_STYLE_USERPROFILE)" && \
+# 	echo $$WINDOWS_STYLE_USERPROFILE && \
+# 	echo $$ESCAPED_WINDOWS_STYLE_USERPROFILE && \
+
 configure-vscode:
 ifeq ("$(platform)", "windows")
 	@cp ./templates/$(platform)/cygpath-git-vscode.bat "$(home_dir)/cygpath-git-vscode.bat"
+	@touch ~/AppData/Roaming/Code/User/settings.json
 	@cp -f ~/AppData/Roaming/Code/User/settings.json ~/AppData/Roaming/Code/User/settings.json.bak && \
+	export WINDOWS_STYLE_USERPROFILE="cygpath -d $$USERPROFILE" && \
+	echo $$USERPROFILE && \
+	echo $$WINDOWS_STYLE_USERPROFILE && \
 	cp ./templates/$(platform)/vscode_user_settings.json ~/AppData/Roaming/Code/User/settings.json && \
-	sed -i -e "s/USER_PROFILE/$$USERPROFILE/g" ~/AppData/Roaming/Code/User/settings.json
+	sed -i -e "s=USER_PROFILE=$$WINDOWS_STYLE_USERPROFILE=g" ~/AppData/Roaming/Code/User/settings.json
 endif
 
 #https://apple.stackexchange.com/questions/254380/why-am-i-getting-an-invalid-active-developer-path-when-attempting-to-use-git-a
