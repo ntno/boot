@@ -33,6 +33,7 @@ you will need to keep track of several usernames, passwords, tokens, etc.  a sec
   + packages to install: 
     - install the 'make' package `Devel > make`
     - install the 'git' package
+    - install the 'jq' package
 
 ## set USERPROFILE and HOME environment variables
 
