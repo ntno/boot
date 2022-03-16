@@ -3,6 +3,8 @@ home_dir := $(shell echo "$$HOME")
 git_ssh_key_file_path := $(shell echo "$(home_dir)/.ssh/id_ed25519")
 aws_svc_profile_name := inferno-svc
 
+VS_CODE_SETTING_SNIPPET=`jq --null-input --arg bat_file "$$USERPROFILE\\cygpath-git-vscode.bat" '{"git.path": $$bat_file}'`
+
 set-up-initial-directories:
 	@mkdir -p "$(home_dir)/.ssh"
 	@mkdir -p "$(home_dir)/.aws"
@@ -18,22 +20,13 @@ ifeq ("$(platform)", "windows")
 	@git config --global core.editor "$(home_dir)/cygpath-git-editor.sh"
 endif
 
-#s/\\/\\\\/g
-#   | sed -i -e 's=/=//=g'" && \
-# 	export ESCAPED_WINDOWS_STYLE_USERPROFILE="$(shell $$WINDOWS_STYLE_USERPROFILE)" && \
-# 	echo $$WINDOWS_STYLE_USERPROFILE && \
-# 	echo $$ESCAPED_WINDOWS_STYLE_USERPROFILE && \
-
 configure-vscode:
 ifeq ("$(platform)", "windows")
 	@cp ./templates/$(platform)/cygpath-git-vscode.bat "$(home_dir)/cygpath-git-vscode.bat"
+	@echo "$(VS_CODE_SETTING_SNIPPET)" >  ~/AppData/Roaming/Code/User/git-path.json
 	@touch ~/AppData/Roaming/Code/User/settings.json
-	@cp -f ~/AppData/Roaming/Code/User/settings.json ~/AppData/Roaming/Code/User/settings.json.bak && \
-	export WINDOWS_STYLE_USERPROFILE="cygpath -d $$USERPROFILE" && \
-	echo $$USERPROFILE && \
-	echo $$WINDOWS_STYLE_USERPROFILE && \
-	cp ./templates/$(platform)/vscode_user_settings.json ~/AppData/Roaming/Code/User/settings.json && \
-	sed -i -e "s=USER_PROFILE=$$WINDOWS_STYLE_USERPROFILE=g" ~/AppData/Roaming/Code/User/settings.json
+	@cp -f ~/AppData/Roaming/Code/User/settings.json ~/AppData/Roaming/Code/User/settings.json.bak
+	@jq -s add  ~/AppData/Roaming/Code/User/settings.json.bak ~/AppData/Roaming/Code/User/git-path.json > ~/AppData/Roaming/Code/User/settings.json
 endif
 
 #https://apple.stackexchange.com/questions/254380/why-am-i-getting-an-invalid-active-developer-path-when-attempting-to-use-git-a
