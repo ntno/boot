@@ -64,8 +64,7 @@ HOME variable should be set automatically so no action is necessary here
     - `cd /cygdrive/c/Users/natan.MY/Documents/boot`
 4. run initial set up commands:
     - `make configure-bash-profile`
-    - `make configure-cygwin-profile`
-    - `make configure-vscode`
+    - `make configure-cygwin`
     - `make set-up-git github-username=YOUR_GITHUB_USERNAME email=YOUR_EMAIL`
 5. STOP! do not proceed until you have added your new github ssh key to your github account
 

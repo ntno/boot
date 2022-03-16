@@ -10,9 +10,11 @@ set-up-initial-directories:
 configure-bash-profile:
 	@cp ./templates/$(platform)/.bash_profile "$(home_dir)/.bash_profile"
 
-configure-cygwin-profile:
+configure-cygwin:
 ifeq ("$(platform)", "windows")
 	@cp ./templates/$(platform)/nsswitch.conf /etc/nsswitch.conf
+	@cp ./templates/$(platform)/cygpath-git-editor.sh "$(home_dir)/cygpath-git-editor.sh"
+	@sed -i -e "s=vi=$(home_dir)/cygpath-git-editor.sh=g" "$(home_dir)/cygpath-git-editor.sh"
 endif
 
 #https://apple.stackexchange.com/questions/254380/why-am-i-getting-an-invalid-active-developer-path-when-attempting-to-use-git-a
