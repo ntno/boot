@@ -25,7 +25,6 @@ you will need to keep track of several usernames, passwords, tokens, etc.  a sec
     + install Alpine WSL via Microsoft Store app
     + create UNIX username/password (prompt will pop up after first launch)
 - [git](https://git-scm.com/download)
-  + during the install set up you will be asked to choose a default text editor.  choose "Use Visual Studio Code as Git's default editor" unless you are already comfortable using vim 
   + override default branch name to "main"
 - [cygwin](https://cygwin.com/cygwin-ug-net/setup-net.html#internet-setup) (required for Windows only)
   + root folder: `C:\cygwin`
@@ -66,6 +65,7 @@ HOME variable should be set automatically so no action is necessary here
 4. run initial set up commands:
     - `make configure-bash-profile`
     - `make configure-cygwin`
+    - `make configure-vscode`
     - `make set-up-git github-username=YOUR_GITHUB_USERNAME email=YOUR_EMAIL`
 5. STOP! do not proceed until you have added your new github ssh key to your github account
 
