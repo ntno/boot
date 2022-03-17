@@ -28,7 +28,9 @@ ifeq ("$(platform)", "windows")
 endif
 
 fix-cygwin-git-filemode:
+ifeq ("$(platform)", "windows")
 	@git config --global core.filemode false
+endif
 
 fix-vscode-git-integration:
 ifeq ("$(platform)", "windows")
