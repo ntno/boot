@@ -12,7 +12,7 @@ set-up-initial-directories:
 configure-bash-profile:
 	@cp ./templates/$(platform)/.bash_profile "$(home_dir)/.bash_profile"
 
-configure-cygwin: configure-cygwin-home configure-vscode-as-external-git-editor fix-vscode-git-integration
+configure-cygwin: configure-cygwin-home configure-vscode-as-external-git-editor fix-vscode-git-integration fix-cygwin-git-filemode
 
 configure-cygwin-home:
 ifeq ("$(platform)", "windows")
@@ -25,6 +25,11 @@ ifeq ("$(platform)", "windows")
 	@cp ./templates/$(platform)/cygpath-git-editor.sh "$(home_dir)/cygpath-git-editor.sh"
 	@chmod +x "$(home_dir)/cygpath-git-editor.sh"
 	@git config --global core.editor "$(home_dir)/cygpath-git-editor.sh"
+endif
+
+fix-cygwin-git-filemode:
+ifeq ("$(platform)", "windows")
+	@git config --global core.filemode true
 endif
 
 fix-vscode-git-integration:
