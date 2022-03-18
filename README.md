@@ -15,7 +15,7 @@ you will need to keep track of several usernames, passwords, tokens, etc.  a sec
 
 - github username, password, ssh key passphrase 
 - dockerhub username, password
-- AWS username, password, access token, secret access token  
+- AWS username, password, access token, secret access token (request from AWS system admin)
 
 
 ## install initial software
@@ -68,6 +68,7 @@ HOME variable should be set automatically so no action is necessary here
     - `make configure-bash-profile github-username=YOUR_GITHUB_USERNAME github-token=XXX github-token-name=NAME_OF_TOKEN_IN_GITHUB`  
     - `make set-up-git github-username=YOUR_GITHUB_USERNAME email=YOUR_EMAIL`
     - `make configure-cygwin`
+    - `make configure-aws aws-profile-name=AWS_PROFILE aws-access-key-id=AWS_ACCESS_KEY_ID aws-secret-access-key=AWS_SECRET_ACCESS_KEY` 
 5. STOP! do not proceed until you have added your new github ssh key to your github account
 
 ### Mac  
@@ -80,7 +81,7 @@ HOME variable should be set automatically so no action is necessary here
     - `make configure-bash-profile github-username=YOUR_GITHUB_USERNAME github-token=XXX github-token-name=NAME_OF_TOKEN_IN_GITHUB`  
     - `make install-xcode`  
     - `make set-up-git github-username=YOUR_GITHUB_USERNAME email=YOUR_EMAIL`  
-
+    - `make configure-aws aws-profile-name=AWS_PROFILE aws-access-key-id=AWS_ACCESS_KEY_ID aws-secret-access-key=AWS_SECRET_ACCESS_KEY` 
 5. STOP! do not proceed until you have added your new github ssh key to your github account
 
 
