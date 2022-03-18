@@ -5,6 +5,8 @@ this repository includes automated scripts for setting up a development environm
 ## prerequisites 
 - the computer must be a real machine, not a Windows VM.  see [system-specs](./system-specs.md) for example machine set ups.  
 - [github](https://github.com/) account
+  + personal access token with "repo" permissions
+    + github account > settings > developer settings > personal access tokens > generate new token
 - [dockerhub](https://hub.docker.com/) account
 
 
