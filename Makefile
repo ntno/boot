@@ -84,7 +84,7 @@ configure-aws: check-aws-access-key-id check-aws-secret-access-key check-aws-pro
 	@sed -i -e "s/AWS_PROFILE_NAME/$(aws-profile-name)/g" 	"$(home_dir)/.aws/config"
 	@sed -i -e "s/AWS_PROFILE_NAME/$(aws-profile-name)/g" 	"$(home_dir)/.aws/credentials"
 	@sed -i -e "s/AWS_ACCESS_KEY_ID/$(aws-access-key-id)/g" 		"$(home_dir)/.aws/credentials"
-	@sed -i -e "s/AWS_SECRET_ACCESS_KEY/$(aws-secret-access-key)/g" "$(home_dir)/.aws/credentials"
+	@sed -i -e "s|AWS_SECRET_ACCESS_KEY|$(aws-secret-access-key)|g" "$(home_dir)/.aws/credentials"
 
 set-up-git: configure-git create-git-ssh-key
 
