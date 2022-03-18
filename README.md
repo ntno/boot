@@ -1,6 +1,6 @@
 # boot
 
-this repository includes instructions for setting up a development environment on Windows and Unix.  the notes were most recently updated while setting up development environment on Windows 11 Pro in March 2022.  these instructions should be completed before working on development projects.
+this repository includes automated scripts for setting up a development environment on Windows or Mac.  these notes were most recently updated March 2022 while configuring a development environment on Windows 11 Pro.
 
 ## prerequisites 
 - the computer must be a real machine, not a Windows VM.  see [system-specs](./system-specs.md) for example machine set ups.  
@@ -58,7 +58,7 @@ HOME variable should be set automatically so no action is necessary here
 
 ### Windows  
 
-1. download this repository as zip: https://github.com/ntno/boot/archive/refs/tags/1.0.1.zip  
+1. download this repository as zip: https://github.com/ntno/boot/archive/refs/tags/1.0.2.zip  
 2. move zip file to your documents folder and unzip (ex: `C:\Users\natan.MY\Documents`)  
 3. open cygwin and navigate to the repository source code:    
     - `cd /cygdrive/c/Users/natan.MY/Documents/boot`
@@ -70,7 +70,7 @@ HOME variable should be set automatically so no action is necessary here
 
 ### Mac  
 
-1. download this repository as zip:https://github.com/ntno/boot/archive/refs/tags/1.0.1.zip   
+1. download this repository as zip:https://github.com/ntno/boot/archive/refs/tags/1.0.2.zip   
 2. move zip file to your documents folder and unzip (ex: `/Users/ntno/Documents`)  
 3. open terminal and navigate to the repository source code:  
     - `cd /Users/ntno/Documents/boot`  
