@@ -17,10 +17,13 @@ set-up-initial-directories:
 	@mkdir -p "$(home_dir)/.ssh"
 	@mkdir -p "$(home_dir)/.aws"
 
-configure-bash-profile: check-platform
-	@cp ./templates/$(platform)/.bash_profile "$(home_dir)/.bash_profile"
+configure-bash-profile: check-platform check-github-username check-github-token check-github-token-name
+	@cp ./templates/$(platform)/.bash_profile.tpl "$(home_dir)/.bash_profile"
+	@sed -i -e "s/GITHUB_USERNAME/$(github-username)/g" "$(home_dir)/.bash_profile"
+	@sed -i -e "s/GITHUB_TOKEN_NAME/$(github-token-name)/g" "$(home_dir)/.bash_profile"		
+	@sed -i -e "s/GITHUB_TOKEN/$(github-token)/g" "$(home_dir)/.bash_profile"
 ifeq ($(platform), "windows")
-	@cp ./templates/$(platform)/.bashrc "$(home_dir)/.bashrc"
+	@cp ./templates/$(platform)/.bashrc.tpl "$(home_dir)/.bashrc"
 endif
 
 configure-cygwin: configure-cygwin-home configure-vscode-as-external-git-editor fix-vscode-git-integration fix-cygwin-git-filemode
@@ -72,7 +75,7 @@ prompt-user-to-complete-setup:
 
 configure-git: check-github-username 
 	@cp ./templates/git/.gitignore_global 			"$(home_dir)/.gitignore_global"
-	@cp ./templates/git/.gitconfig 					"$(home_dir)/.gitconfig"
+	@cp ./templates/git/.gitconfig.tpl				"$(home_dir)/.gitconfig"
 	@sed -i -e "s/GITHUB_USERNAME/$(github-username)/g" 	"$(home_dir)/.gitconfig"
 
 configure-aws: check-aws-access-key-id check-aws-secret-access-key set-up-initial-directories
@@ -97,6 +100,15 @@ ifndef github-username
 	$(error github-username is not defined)
 endif
 
+check-github-token:
+ifndef github-token
+	$(error github-token is not defined)
+endif
+
+check-github-token-name:
+ifndef github-token-name
+	$(error github-token-name is not defined)
+endif
 check-aws-access-key-id:
 ifndef aws-access-key-id
 	$(error aws-access-key-id is not defined)
