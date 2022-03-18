@@ -23,7 +23,7 @@ configure-bash-profile: check-platform check-github-username check-github-token 
 	@sed -i -e "s/GITHUB_TOKEN_NAME/$(github-token-name)/g" "$(home_dir)/.bash_profile"		
 	@sed -i -e "s/GITHUB_TOKEN/$(github-token)/g" "$(home_dir)/.bash_profile"
 ifeq ($(platform), "windows")
-	@cp ./templates/$(platform)/.bashrc.tpl "$(home_dir)/.bashrc"
+	@cp ./templates/$(platform)/.bashrc "$(home_dir)/.bashrc"
 endif
 
 configure-cygwin: configure-cygwin-home configure-vscode-as-external-git-editor fix-vscode-git-integration fix-cygwin-git-filemode
