@@ -20,8 +20,8 @@ set-up-initial-directories:
 configure-bash-profile: check-platform check-github-username check-github-token check-github-token-name
 	@cp ./templates/$(platform)/.bash_profile "$(home_dir)/.bash_profile"
 	@sed -i -e "s/GITHUB_USERNAME/$(github-username)/g" "$(home_dir)/.bash_profile"
-	@sed -i -e "s/GITHUB_TOKEN/$(github-token)/g" "$(home_dir)/.bash_profile"
 	@sed -i -e "s/GITHUB_TOKEN_NAME/$(github-token-name)/g" "$(home_dir)/.bash_profile"		
+	@sed -i -e "s/GITHUB_TOKEN/$(github-token)/g" "$(home_dir)/.bash_profile"
 ifeq ($(platform), "windows")
 	@cp ./templates/$(platform)/.bashrc "$(home_dir)/.bashrc"
 endif
