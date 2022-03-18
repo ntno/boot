@@ -15,7 +15,7 @@ you will need to keep track of several usernames, passwords, tokens, etc.  a sec
 
 - github username, password, ssh key passphrase 
 - dockerhub username, password
-- AWS username, password, access token, secret access token  
+- AWS username, password, access token, secret access token (request from AWS system admin)
 
 
 ## install initial software
