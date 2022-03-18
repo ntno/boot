@@ -1,39 +1,47 @@
-platform := windows
+SHELL:=/bin/bash
+in_cygwin := $(shell which cygpath 1> /dev/null 2> /dev/null;  echo $$?)
 home_dir := $(shell echo "$$HOME")
+curr_dir := $(shell pwd)
 git_ssh_key_file_path := $(shell echo "$(home_dir)/.ssh/id_ed25519")
 aws_svc_profile_name := inferno-svc
 
 VS_CODE_SETTING_SNIPPET=`jq --null-input --arg bat_file "$$USERPROFILE\\cygpath-git-vscode.bat" '{"git.path": $$bat_file}'`
 
+ifeq (0, $(in_cygwin))
+	platform := "windows"
+else
+	platform := "unix"
+endif
+
 set-up-initial-directories:
 	@mkdir -p "$(home_dir)/.ssh"
 	@mkdir -p "$(home_dir)/.aws"
 
-configure-bash-profile:
+configure-bash-profile: check-platform
 	@cp ./templates/$(platform)/.bash_profile "$(home_dir)/.bash_profile"
 
 configure-cygwin: configure-cygwin-home configure-vscode-as-external-git-editor fix-vscode-git-integration fix-cygwin-git-filemode
 
-configure-cygwin-home:
-ifeq ("$(platform)", "windows")
+configure-cygwin-home: check-platform
+ifeq ($(platform), "windows")
 	@cp ./templates/$(platform)/nsswitch.conf /etc/nsswitch.conf
 endif
 
 #TODO - need to refactor so that if you run git set up you don't lose core.editor setting
-configure-vscode-as-external-git-editor:
-ifeq ("$(platform)", "windows")
+configure-vscode-as-external-git-editor: check-platform
+ifeq ($(platform), "windows")
 	@cp ./templates/$(platform)/cygpath-git-editor.sh "$(home_dir)/cygpath-git-editor.sh"
 	@chmod +x "$(home_dir)/cygpath-git-editor.sh"
 	@git config --global core.editor "$(home_dir)/cygpath-git-editor.sh"
 endif
 
-fix-cygwin-git-filemode:
-ifeq ("$(platform)", "windows")
+fix-cygwin-git-filemode: check-platform
+ifeq ($(platform), "windows")
 	@git config --global core.filemode true
 endif
 
-fix-vscode-git-integration:
-ifeq ("$(platform)", "windows")
+fix-vscode-git-integration: check-platform
+ifeq ($(platform), "windows")
 	@cp ./templates/$(platform)/cygpath-git-vscode.bat "$(home_dir)/cygpath-git-vscode.bat"
 	@echo "$(VS_CODE_SETTING_SNIPPET)" >  ~/AppData/Roaming/Code/User/git-path.json
 	@cp -f ~/AppData/Roaming/Code/User/settings.json ~/AppData/Roaming/Code/User/settings.json.bak
@@ -41,8 +49,8 @@ ifeq ("$(platform)", "windows")
 endif
 
 #https://apple.stackexchange.com/questions/254380/why-am-i-getting-an-invalid-active-developer-path-when-attempting-to-use-git-a
-install-xcode:
-ifeq ("$(platform)", "mac")
+install-xcode: check-platform
+ifeq ($(platform), "unix")
 	xcode-select --install
 endif
 
@@ -94,4 +102,9 @@ endif
 check-aws-secret-access-key:
 ifndef aws-secret-access-key
 	$(error aws-secret-access-key is not defined)
+endif
+
+check-platform:
+ifndef platform
+	$(error platform is not defined)
 endif
