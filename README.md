@@ -60,7 +60,7 @@ HOME variable should be set automatically so no action is necessary here
 
 ### Windows  
 
-1. download this repository as zip: https://github.com/ntno/boot/archive/refs/tags/1.0.2.zip  
+1. download this repository as zip: https://github.com/ntno/boot/archive/refs/tags/1.0.3.zip  
 2. move zip file to your documents folder and unzip (ex: `C:\Users\natan.MY\Documents`)  
 3. open cygwin and navigate to the repository source code:    
     - `cd /cygdrive/c/Users/natan.MY/Documents/boot`
@@ -72,7 +72,7 @@ HOME variable should be set automatically so no action is necessary here
 
 ### Mac  
 
-1. download this repository as zip:https://github.com/ntno/boot/archive/refs/tags/1.0.2.zip   
+1. download this repository as zip:https://github.com/ntno/boot/archive/refs/tags/1.0.3.zip   
 2. move zip file to your documents folder and unzip (ex: `/Users/ntno/Documents`)  
 3. open terminal and navigate to the repository source code:  
     - `cd /Users/ntno/Documents/boot`  
