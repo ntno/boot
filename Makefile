@@ -17,8 +17,11 @@ set-up-initial-directories:
 	@mkdir -p "$(home_dir)/.ssh"
 	@mkdir -p "$(home_dir)/.aws"
 
-configure-bash-profile: check-platform
+configure-bash-profile: check-platform check-github-username check-github-token check-github-token-name
 	@cp ./templates/$(platform)/.bash_profile "$(home_dir)/.bash_profile"
+	@sed -i -e "s/GITHUB_USERNAME/$(github-username)/g" "$(home_dir)/.bash_profile"
+	@sed -i -e "s/GITHUB_TOKEN/$(github-token)/g" "$(home_dir)/.bash_profile"
+	@sed -i -e "s/GITHUB_TOKEN_NAME/$(github-token-name)/g" "$(home_dir)/.bash_profile"		
 ifeq ($(platform), "windows")
 	@cp ./templates/$(platform)/.bashrc "$(home_dir)/.bashrc"
 endif
@@ -97,6 +100,15 @@ ifndef github-username
 	$(error github-username is not defined)
 endif
 
+check-github-token:
+ifndef github-token
+	$(error github-token is not defined)
+endif
+
+check-github-token-name:
+ifndef github-token-name
+	$(error github-token-name is not defined)
+endif
 check-aws-access-key-id:
 ifndef aws-access-key-id
 	$(error aws-access-key-id is not defined)
