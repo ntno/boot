@@ -19,6 +19,9 @@ set-up-initial-directories:
 
 configure-bash-profile: check-platform
 	@cp ./templates/$(platform)/.bash_profile "$(home_dir)/.bash_profile"
+ifeq ($(platform), "windows")
+	@cp ./templates/$(platform)/.bashrc "$(home_dir)/.bashrc"
+endif
 
 configure-cygwin: configure-cygwin-home configure-vscode-as-external-git-editor fix-vscode-git-integration fix-cygwin-git-filemode
 

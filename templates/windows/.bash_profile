@@ -59,3 +59,5 @@ export MY_DOCS=$(cygpath --mydocs)
 export CODE_HOME="${MY_DOCS}/projects"
 export DATACLUB="${Z_DRIVE}"
 export RON_IN_DATACLUB="${DATACLUB}/Ron's Personal"
+
+mkdir -p $CODE_HOME
