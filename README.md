@@ -75,9 +75,9 @@ HOME variable should be set automatically so no action is necessary here
 3. open terminal and navigate to the repository source code:  
     - `cd /Users/ntno/Documents/boot`  
 4. run initial set up commands:   
-    - `make configure-bash-profile platform=mac`  
-    - `make install-xcode platform=mac`  
-    - `make set-up-git github-username=YOUR_GITHUB_USERNAME email=YOUR_EMAIL platform=mac`  
+    - `make configure-bash-profile`  
+    - `make install-xcode`  
+    - `make set-up-git github-username=YOUR_GITHUB_USERNAME email=YOUR_EMAIL`  
 
 5. STOP! do not proceed until you have added your new github ssh key to your github account
 
