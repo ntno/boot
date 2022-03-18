@@ -101,8 +101,8 @@
 # alias ll='ls -l'                              # long list
 # alias la='ls -A'                              # all but . and ..
 # alias l='ls -CF'                              #
-alias ls='ls -tr1cGFh'
-alias ll='ls -ltr -A -GFh'
+alias ls='ls -tr1cGFh --color=tty'
+alias ll='ls -ltr -A -GFh --color=tty'
 
 # Umask
 #
