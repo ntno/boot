@@ -3,7 +3,6 @@ in_cygwin := $(shell which cygpath 1> /dev/null 2> /dev/null;  echo $$?)
 home_dir := $(shell echo "$$HOME")
 curr_dir := $(shell pwd)
 git_ssh_key_file_path := $(shell echo "$(home_dir)/.ssh/id_ed25519")
-aws_svc_profile_name := inferno-svc
 
 VS_CODE_SETTING_SNIPPET=`jq --null-input --arg bat_file "$$USERPROFILE\\cygpath-git-vscode.bat" '{"git.path": $$bat_file}'`
 
@@ -78,12 +77,12 @@ configure-git: check-github-username
 	@cp ./templates/git/.gitconfig.tpl				"$(home_dir)/.gitconfig"
 	@sed -i -e "s/GITHUB_USERNAME/$(github-username)/g" 	"$(home_dir)/.gitconfig"
 
-configure-aws: check-aws-access-key-id check-aws-secret-access-key set-up-initial-directories
+configure-aws: check-aws-access-key-id check-aws-secret-access-key check-aws-profile-name set-up-initial-directories
 	@cp ./templates/aws/config "$(home_dir)/.aws/config"
 	@cp ./templates/aws/credentials "$(home_dir)/.aws/credentials"
 	@chmod 600 "$(home_dir)/.aws/credentials"
-	@sed -i -e "s/AWS_SVC_PROFILE_NAME/$(aws_svc_profile_name)/g" 	"$(home_dir)/.aws/config"
-	@sed -i -e "s/AWS_SVC_PROFILE_NAME/$(aws_svc_profile_name)/g" 	"$(home_dir)/.aws/credentials"
+	@sed -i -e "s/AWS_PROFILE_NAME/$(aws-profile-name)/g" 	"$(home_dir)/.aws/config"
+	@sed -i -e "s/AWS_PROFILE_NAME/$(aws-profile-name)/g" 	"$(home_dir)/.aws/credentials"
 	@sed -i -e "s/AWS_ACCESS_KEY_ID/$(aws-access-key-id)/g" 		"$(home_dir)/.aws/credentials"
 	@sed -i -e "s/AWS_SECRET_ACCESS_KEY/$(aws-secret-access-key)/g" "$(home_dir)/.aws/credentials"
 
@@ -117,6 +116,11 @@ endif
 check-aws-secret-access-key:
 ifndef aws-secret-access-key
 	$(error aws-secret-access-key is not defined)
+endif
+
+check-aws-profile-name:
+ifndef aws-profile-name
+	$(error aws-profile-name is not defined)
 endif
 
 check-platform:
