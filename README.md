@@ -26,6 +26,7 @@ you will need to keep track of several usernames, passwords, tokens, etc.  a sec
   + if necessary, install [WSL 2 Linux kernel](https://docs.microsoft.com/en-us/windows/wsl/install-manua) via separate package
     + install Alpine WSL via Microsoft Store app
     + create UNIX username/password (prompt will pop up after first launch)
+  + start Docker Desktop after installation and sign in with dockerhub account
 - [git](https://git-scm.com/download)
   + override default branch name to "main"
 - [cygwin](https://cygwin.com/cygwin-ug-net/setup-net.html#internet-setup) (required for Windows only)
